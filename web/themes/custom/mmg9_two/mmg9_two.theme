@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * @file
+ * Theme specific functionality.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Url;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\media\Entity\Media;
+use Drupal\Core\Render\Markup;
+
+function mmg9_two_page_attachments_alter(array &$attachments) {
+  $fonts = [
+    '#type' => 'html_tag',
+    '#tag' => 'link',
+    '#attributes' => [
+      'rel' => 'preload',
+      'as' => 'style',
+      'onload' => 'this.onload=null; this.rel="stylesheet"',
+      'href' => '/themes/custom/mmg9/sass/fonts.css?v1.0',
+    ],
+  ];
+
+  $viewport = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => [
+      'name' => 'viewport',
+      'content' => 'viewport-fit=cover, width=device-width, initial-scale=1.0',
+    ],
+  ];
+
+  $attachments['#attached']['html_head'][] = [$fonts, 'fonts'];
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function mmg9_two_preprocess_html(&$variables) {
+  $path = \Drupal::service('path.current')->getPath();
+  $alias = trim(\Drupal::service('path_alias.manager')
+    ->getAliasByPath($path), '/');
+
+  $page_path = explode('/', $path)[1];
+  if (!empty($page_path)) {
+    $variables['attributes']['class'][] = Html::cleanCssIdentifier('path--' . $page_path);
+  }
+  // Alias path class.
+  $alias_class = preg_replace("/\//", '-', $alias);
+  if (!empty($alias_class) && strpos($alias_class, 'node') !== 0) {
+    $variables['attributes']['class'][] = Html::cleanCssIdentifier('alias--' . $alias_class);
+  }
+  // If is homepage.
+  $variables['attributes']['class'][] = \Drupal::service('path.matcher')
+    ->isFrontPage() ? 'frontpage' : 'not-front';
+  // Node type class.
+  $variables['attributes']['class'][] = isset($variables['node_type']) ? 'nodetype--' . $variables['node_type'] : '';
+  // Logged in class.
+  $variables['attributes']['class'][] = $variables['logged_in'] ? 'logged-in' : 'logged-out';
+
+  // If logged in add contextual edit helpers
+  if (isset($variables['logged_in']) && $variables['logged_in']) {
+    $variables['#attached']['library'][] = 'mmg9_two/contextual-quickedit';
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function mmg9_two_preprocess_page(&$variables) {
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['title'] =  $variables['page']['#title'];
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    $variables['is_node'] = TRUE;
+  } else {
+    $variables['is_node'] = FALSE;
+  }
+
+  // Load the Logo
+  $logo_header_file = drupal_get_path('theme', 'mmg9_two') . '/mmg9_two_logo.svg';
+  // Check file extension and render logo accordingly
+  if ($logo_header_file) {
+    $ext = pathinfo($logo_header_file, PATHINFO_EXTENSION);
+    if ($ext == 'svg') {
+      $rendered_logo = file_get_contents($logo_header_file);
+    } else {
+      $rendered_logo = '<img src="/' . $logo_header_file . '" alt="' . $variables['site_name'] .  " " . t('Logo') .'"/>';
+    }
+    $variables['logo_header'] = $rendered_logo;
+  }
+
+  // Logged in variables
+  $variables['logged_in'] = FALSE;
+  if ($variables['user']->isAuthenticated()) {
+    $variables['logged_in'] = TRUE;
+    $user_roles = $variables['user']->getRoles();
+    // Tota11y roles
+    $tota11y_roles = ['administrator', 'main_administrator'];
+    foreach ($user_roles as $user_role) {
+      if (in_array($user_role, $tota11y_roles)) {
+        $variables['show_totally'] = TRUE;
+      }
+    }
+  }
+}

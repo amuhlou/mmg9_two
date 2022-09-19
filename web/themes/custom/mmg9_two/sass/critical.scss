@@ -1,0 +1,13 @@
+// import the styles that are critical for
+// rendering above the fold content
+// these will be embeded into the website as opposed to attached as a library.
+// See mmg9_two.theme
+:root {
+  --akshar: "Akshar", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+@import url(https://fonts.bunny.net/css?family=akshar:300,400,500,600,700);
+@import 'reset';
+@import 'config';
+@import 'mixins';
+@import 'base/base';

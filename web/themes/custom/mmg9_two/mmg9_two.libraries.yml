@@ -1,0 +1,111 @@
+header-styling:
+  version: VERSION
+  css:
+    theme:
+      dist/critical.min.css: {}
+global-scripts:
+  version: VERSION
+  js:
+    dist/js/mmg9_two.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - mmg9_two/select2
+## Some commonly needed utilities
+select2:
+  version: VERSION
+  css:
+    theme:
+      libraries/select2/css/select2.min.css: {}
+  js:
+    libraries/select2/js/select2.min.js: {}
+# accessible slick  https://accessible360.github.io/accessible-slick/
+slick:
+  version: VERSION
+  css:
+    theme:
+      libraries/accessible-slick/slick/slick.min.css: {}
+      libraries/accessible-slick/slick/accessible-slick-theme.min.css: {}
+  js:
+    libraries/accessible-slick/slick/slick.min.js: {}
+tota11y:
+  version: VERSION
+  js:
+    libraries/tota11y/tota11y.min.js: {}
+# greensock animation platform, see libraries/gsap/ for full list of plugins
+gsap:
+  version: VERSION
+  js:
+    libraries/gsap/gsap.min.js: { weight: -3 }
+    #libraries/gsap/ScrollTrigger.min.js: { weight: -2 }
+simplebar:
+    version: VERSION
+    css:
+      theme:
+        libraries/simplebar/simplebar.css: {}
+    js:
+      libraries/simplebar/simplebar.min.js: { weigjht: -2 }
+      libraries/simplebar/simplebar-tabindex.js: { weight: -1 }
+## Components
+article-content-list:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/article-content-list/article-content-list.min.css: {}
+custom-markup:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/custom-markup/custom-markup.min.css: {}
+dfp-tags:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/dfp-tags/dfp-tags.min.css: {}
+listings:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/listings/listings.min.css: {}
+promo:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/promo/promo.min.css: {}
+related-content:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/related-content/related-content.min.css: {}
+sharethis:
+    version: VERSION
+    css:
+      theme:
+        dist/component-entities/sharethis/sharethis.min.css: {}
+slideshow:
+    version: VERSION
+    js:
+      dist/js/mmg9_two_slideshow.js: {}
+    dependencies:
+      - mmg9_two/slick
+text-with-cta:
+  version: VERSION
+  css:
+    theme:
+      dist/component-entities/text-with-cta/text-with-cta.min.css: {}
+video-player:
+  version: VERSION
+  css:
+    theme:
+      dist/component-entities/video-player/video-player.min.css: {}
+  js:
+    dist/js/mmg9_two_video_player.js: {}
+  dependencies:
+      - mmg9_two/slick
+contextual-quickedit:
+  version: VERSION
+  js:
+    dist/js/mmg9_two_contextual_quickedit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax

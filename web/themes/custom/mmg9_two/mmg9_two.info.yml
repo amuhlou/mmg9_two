@@ -1,0 +1,16 @@
+name: MMG9 Two - This Time It's Not The First One
+type: theme
+base theme: stable
+description: 'Miles Drupal 9 Starter Theme'
+core_version_requirement: ^8 || ^9
+libraries:
+  - 'mmg9_two/header-styling'
+  - 'mmg9_two/global-scripts'
+ckeditor_stylesheets:
+  - 'dist/critical.min.css'
+regions:
+  header: Header
+  content: Content
+  footer: Footer
+  disabled: Disabled
+

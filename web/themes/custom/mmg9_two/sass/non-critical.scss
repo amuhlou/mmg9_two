@@ -1,0 +1,11 @@
+/*
+## non critical loaded at end of body, per https://csswizardry.com/2022/09/critical-css-not-so-fast/
+## see html.html.twig template
+*/
+.block,
+.component {
+  position: relative;
+  background-color: orange;
+  border: 1px solid blue;
+
+}
