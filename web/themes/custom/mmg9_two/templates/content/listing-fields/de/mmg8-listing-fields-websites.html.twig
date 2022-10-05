@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% set site_options =
+  {
+    'business': 'Website'|t,
+  }
+%}
+{% if listing.websites is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+
+  {% set continue = true %}
+  {% for website_type,site in site_options %}
+    {% if attribute(listing.websites, website_type) is not empty %}
+      {% if continue %}
+        todo: check aria-label
+      {{ link('Visit Website'|t, attribute(listing.websites, website_type), { 'class':['button', 'website-link', 'website-link--' ~ attribute(listing.websites, website_type)|clean_class, 'partner-referral'] , 'target': '_blank', 'data-action' : ['outbound_' ~ view_mode ~ '--website'], 'aria-label' : 'Visit Website for ' ~ listing.title }) }}
+      {% endif %}
+      {% set continue = false %}
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endif %}
+
+{% if listing.website is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    {% if 'http' not in listing.website %}
+      {% set link_url = 'https://' ~ listing.website %}
+    {% else %}
+      {% set link_url = listing.website %}
+    {% endif %}
+    todo: check aria-label
+   {{ link('Visit Website'|t, link_url, { 'class':['button', 'website-link', 'website-link--' ~ listing.website|clean_class, 'partner-referral'] , 'target': '_blank', 'data-action' : ['outbound_' ~ view_mode ~ '--website'], 'aria-label' : 'Visit Website for ' ~ listing.title }) }}
+  </div>
+{% endif %}
+
+{% if listing.business_url is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    {% if 'http' not in listing.business_url %}
+      {% set link_url = 'https://' ~ listing.business_url %}
+    {% else %}
+      {% set link_url = listing.business_url %}
+    {% endif %}
+    todo: check aria-label
+   {{ link('Visit Website'|t, link_url, { 'class':['button', 'website-link', 'website-link--' ~ listing.business_url|clean_class, 'partner-referral'] , 'target': '_blank', 'data-action' : ['outbound_' ~ view_mode ~ '--website'], 'aria-label' : 'Visit Website for ' ~ listing.title }) }}
+  </div>
+{% endif %}

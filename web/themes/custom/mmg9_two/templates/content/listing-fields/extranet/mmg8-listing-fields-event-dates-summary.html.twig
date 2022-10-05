@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+{% if listing.event_dates is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+
+    {% if view_mode == 'full' or view_mode == 'featured' %}
+      {% if next_showing.day|date('F j, Y') == last_showing.daymonthyear %}
+        <div class="day">{{ next_showing.day|date('l, F j, Y') }}</div>
+      {% else %}
+        {% set start_year = '' %}
+        {% if next_showing.day|date('Y') != last_showing.day|date('Y') %}
+          {% set start_year = ', ' ~ next_showing.day|date('Y')%}
+        {% endif %}
+        <div class="day range">{{ next_showing.day|date('l, F j') ~ start_year ~ ' - ' ~ last_showing.day }}</div>
+      {% endif %}
+    {% else %}
+
+      <div class="next-showing">
+        <div class="day">{{ next_showing.day }}</div>
+        <div class="times">{{ next_showing.times }}</div>
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

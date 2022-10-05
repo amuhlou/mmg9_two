@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+{# {{ kint(listing) }} #}
+{% if listing.products[0].tier.type == "Featured" %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+  {{ "Featured"|t }}
+</div>
+{% endif %}

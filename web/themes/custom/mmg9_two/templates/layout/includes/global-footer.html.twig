@@ -1,0 +1,13 @@
+<footer id="footer" role="contentinfo">
+  <section id="footer--top">
+    <div class="inner">
+        <p>{{ "Copyright "|t ~ "now"|date('Y') ~ " Miles Partnership"|t }}</p>
+    </div>
+  </section>
+  <section id="footer--bottom">
+      {{ drupal_menu('footer') }}
+  </section>
+  {% if page.footer %}
+      {{ page.footer }}
+  {% endif %}
+</footer>

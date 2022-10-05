@@ -1,0 +1,24 @@
+{{ attach_library('mmg9_two/listings') }}
+
+{% if google_map_key is not empty %}
+  <!--<script async defer
+          src="https://maps.googleapis.com/maps/api/js?key={# google_map_key #}">
+  </script>-->
+{% endif %}
+
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="content">
+    <div class="intro">
+    {% if content.field_listings_title %}
+    <h3>{{ content.field_listings_title }}</h3>
+    {% endif %}
+    {{ content.field_listings_subtitle }}
+    </div>
+    <div class="facets-wrap">
+      {{ content.field_facet_blocks }}
+    </div>
+    {{ content.mmg8_listings_filtered_view }}
+  </div>
+</div>
+

@@ -1,0 +1,85 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if event_dates is not empty %}
+  <div id="event-dates-anchor"></div>
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    <div class="next-showing">
+      <span class="next-label">{{ 'Next Event:'|t }}</span>
+
+      <div class="day">{{ next_showing.day }}</div>
+      <div class="times">{{ next_showing.times }}</div>
+    </div>
+    <div class="schedule">
+
+      <div id="caleandar"></div>
+      {% set start_month = next_showing.schema_start|date('F') %}
+      {% set start_year = next_showing.schema_start|date('Y') %}
+
+      {% set month_counter = 0 %}
+      {% set display_none_style = "" %}
+
+      {% for year, months in event_dates %}
+
+        {% for month, dates in months %}
+
+          {% if start_month|date('n') == month|date('n') and start_year == year %}
+            {% set display_none_style = '' %}
+          {% else %}
+            {% set display_none_style = 'display: none;' %}
+          {% endif %}
+
+          <div class="month-group" data-month="{{ month|date('n') }}-{{ year }}" style="{{ display_none_style }}">
+            <div class="date-list-heading">
+              {{'Dates & Times for ' ~ month ~ ' ' ~ year }}
+            </div>
+            {% for day,date in dates %}
+
+            <div class="date-list-item">
+              <!--<div class="weekday">{# date[0].start_day_full|date('l,') #}</div>-->
+              <div class="month-and-day-number">{{ date[0].start|date(' F j, Y') }}
+                <span class="times">
+                      {% for event_occurences in date %}
+                        <!--<div class="time-container">-->
+                        {# event_occurences.event_times #}
+                        <!--</div>-->
+                      {% endfor %}
+                  </span>
+              </div>
+            </div>
+
+            {% if loop.index == 5 and dates|length > 5 %}
+            <button class="see-all-dates"><span>{{ "See All "|t}} {{ month|t }} {{ " Dates and Times" | t }}</span></button>
+
+            <div class="the-rest closed">
+              {% endif %}
+
+              {% endfor %}
+
+              {% if dates|length > 5 %}
+              <button class="see-fewer-dates"><span>{{ "See Fewer "|t}} {{ month|t }} {{ "Dates and Times" | t }}</span></button>
+            </div>
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+{% endif %}
+

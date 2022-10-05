@@ -1,0 +1,15 @@
+.node--listing--full {
+  > .node__content {
+    @include center-me(81.25rem);
+
+    padding-inline: 1.25rem;
+    padding-block: 1.875rem;
+  }
+
+  /*
+  To change placement of slick arrow div, see
+  /modules/features/site_features/mmg8_listing_fields/mmg8_listing_fields.module
+  ~line 1155
+  */
+  //@include slick-arrow-defaults;
+}

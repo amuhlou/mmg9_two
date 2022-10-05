@@ -1,0 +1,305 @@
+// Forms
+$form-border-radius: 3px;
+$form-border-color: var(--miles-blue);
+$form-border-color-focus: var(--miles-teal);
+$form-accent-color: var(--miles-teal);
+$form-border-width: 1px;
+
+.form-item {
+  margin-inline: 0;
+  margin-block: 2rem;
+
+  .description {
+    font-size: 1.5rem;
+    margin-block-start: 0.5rem;
+    font-family: var(--font-family-base);
+  }
+}
+
+label,
+span.fieldset-legend {
+  display: inline-block;
+  color: var(--font-color-base);
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 2rem;
+  font-family: var(--font-family-base);
+  margin-inline: 0;
+  margin-block: 0 0.7rem;
+  padding-block: 0;
+  padding-inline: 0.5rem 0.2rem;
+  vertical-align: top;
+
+  &.form-required {
+    span.required-asterisk {
+      color: var(--miles-red);
+    }
+  }
+}
+
+span.fieldset-legend.form-required {
+  &::after {
+    content: '*';
+    color: var(--miles-red);
+  }
+}
+
+fieldset.webform-type-checkboxes,
+fieldset.webform-type-radios {
+  legend {
+    margin-block: 0;
+    margin-inline: 0;
+  }
+}
+
+/* stylelint-disable */
+
+input[type="submit"] {
+  @include button;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea {
+  background-color: var(--white);
+  color: var(--font-color-base);
+  border: $form-border-width solid $form-border-color;
+  border-radius: $form-border-radius;
+  display: block;
+  box-sizing: border-box;
+  padding-block: 0.8rem 0.9rem;
+  padding-inline: 1.6rem;
+  width: 100%;
+  max-width: 50rem;
+  font-family: var(--font-family-base);
+  font-size: 1.6rem;
+  -webkit-appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  border: $form-border-width solid $form-border-color-focus;
+  background-color: var(--white);
+  outline: none;
+  -webkit-appearance: none;
+}
+
+
+input[type="file"],
+input[type="checkbox"],
+input[type="radio"],
+select,
+select:focus {
+  font-size: 1.6rem;
+  margin-block: 0.3rem;
+  margin-inline: 0;
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+.form-type-select br {
+  display: none;
+}
+
+/* stylelint-enable */
+
+fieldset {
+  border: 0 !important;
+  padding-inline: 1.5rem;
+  padding-block: 1.5rem;
+  margin-block: 1.5rem;
+  margin-inline: 0;
+}
+
+fieldset legend {
+  font-size: 2rem;
+  font-weight: bold;
+  background: transparent;
+  padding-inline: 0;
+  padding-block: 0;
+  margin-inline: 0;
+  margin-block: 0 2rem;
+}
+
+#edit-actions {
+  margin-block-start: 3rem;
+}
+
+.form-item.form-type-checkbox,
+.form-item.form-type-radio {
+  padding-inline: 0;
+  padding-block: 0;
+  margin-block: 1rem;
+  margin-inline: 0;
+}
+
+// https://codepen.io/5t3ph/pen/RwrOygP
+// https://codepen.io/5t3ph/pen/VweBgeZ
+.form-type-checkbox,
+.form-type-radio,
+.facets-widget-checkbox li.facet-item {
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+
+  p {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+
+  --form-control-color: var(--miles-teal);
+
+  label {
+    font-size: 1.8rem;
+    line-height: calc(28 / 18);
+    font-weight: 400;
+    margin-block: 0;
+    margin-inline: 0;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  label:focus {
+    //border: 0;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    margin-block: 0;
+    margin-inline: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(var(--miles-teal-rgb), 0.04);
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.1em solid var(--form-control-color);
+    border-radius: 0.2em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    margin-block: 0.2rem 0;
+  }
+
+  input[type="radio"] {
+    border-radius: 50%;
+  }
+
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--miles-navy);
+    // Windows High Contrast Mode
+    background-color: CanvasText;
+  }
+
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--miles-navy);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+  }
+
+  input[type="checkbox"]:checked::before,
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+  input[type="checkbox"]:focus,
+  input[type="radio"]:focus {
+    outline: #{"max(2px, 0.15em)"} solid var(--miles-green);
+    outline-offset: #{"max(2px, 0.15em)"};
+  }
+
+  input[type="checkbox"]:disabled
+  input[type="radio"]:disabled {
+    --form-control-color: var(--form-control-disabled);
+
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+  }
+}
+.form-type-select,
+.form-type-tel,
+.form-type-url {
+  label {
+    display: block;
+  }
+}
+
+#main article .form-type-tel {
+  ul {
+    > li {
+      display: block;
+      margin-inline: 0;
+      margin-block: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.checkboxes--wrapper {
+  max-width: 52rem;
+
+  legend {
+    display: block;
+    width: 100%;
+    padding-block-end: 1rem;
+  }
+
+  .js-webform-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      flex-basis: 100%;
+
+      @media #{$medium} {
+        flex-basis: 50%;
+      }
+    }
+  }
+}
+
+@import 'webforms';
+@import 'select2';

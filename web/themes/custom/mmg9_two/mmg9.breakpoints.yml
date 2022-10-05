@@ -1,0 +1,78 @@
+mmg9_two.xxsmall:
+  label: xxsmall (0)
+  mediaQuery: 'all and (min-width: 0px)'
+  weight: 0
+  multipliers:
+    - 1x
+mmg9_two.xsmall:
+  label: xsmall (375px)
+  mediaQuery: 'all and (min-width: 375px)'
+  weight: 1
+  multipliers:
+    - 1x
+mmg9_two.small:
+  label: small (576px)
+  mediaQuery: 'all and (min-width: 576px)'
+  weight: 2
+  multipliers:
+    - 1x
+mmg9_two.smallish:
+  label: small-ish (680px)
+  mediaQuery: 'all and (min-width: 680px)'
+  weight: 3
+  multipliers:
+    - 1x
+mmg9_two.medium:
+  label: medium (768px)
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 4
+  multipliers:
+    - 1x
+mmg9_two.tablet:
+  label: tablet (834px)
+  mediaQuery: 'all and (min-width: 834px)'
+  weight: 5
+  multipliers:
+    - 1x
+mmg9_two.mediumish:
+  label: medium-ish (960px)
+  mediaQuery: 'all and (min-width: 960px)'
+  weight: 6
+  multipliers:
+    - 1x
+mmg9_two.large:
+  label: large (1024px)
+  mediaQuery: 'all and (min-width: 1024px)'
+  weight: 7
+  multipliers:
+    - 1x
+mmg9_two.larger:
+  label: larger (1080px)
+  mediaQuery: 'all and (min-width: 1080px)'
+  weight: 8
+  multipliers:
+    - 1x
+mmg9_two.xlarge:
+  label: x-large (1280px)
+  mediaQuery: 'all and (min-width: 1280px)'
+  weight: 9
+  multipliers:
+    - 1x
+mmg9_two.xxlarge:
+  label: xx-large (1400px)
+  mediaQuery: 'all and (min-width: 1400px)'
+  weight: 10
+  multipliers:
+    - 1x
+mmg9_two.xxxlarge:
+  label: xxx-large (1650px)
+  mediaQuery: 'all and (min-width: 1650px)'
+  weight: 11
+  multipliers:
+    - 1x
+mmg9_two.wide:
+  label: xxxx-large (1900px)
+  mediaQuery: 'all and (min-width: 1900px)'
+  weight: 12
+  multipliers:
+    - 1x

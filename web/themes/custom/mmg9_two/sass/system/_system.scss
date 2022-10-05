@@ -1,0 +1,27 @@
+@import 'messages';
+@import 'tabs';
+@import 'drupal';
+
+.path--user,
+.path--webform,
+.path--filter {
+  #main {
+    .mq-main {
+      @include center-me(102rem);
+
+      padding-inline: 2rem;
+      padding-block: 4rem;
+    }
+  }
+}
+
+.ajax-progress,
+.ajax-progress-throbber,
+.ajax-progress-fullscreen {
+  display: none !important;
+}
+
+.ajax-progress-throbber::before,
+.ajax-progress-fullscreen::before {
+  display: none !important;
+}

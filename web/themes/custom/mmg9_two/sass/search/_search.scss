@@ -1,0 +1,89 @@
+.path--search,
+.path--local-search {
+  #content-area {
+    @include center-me(96rem);
+
+    padding-block: 3rem;
+    padding-inline: 2rem;
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      text-align: left;
+      margin-block-end: 1.5rem;
+    }
+
+    #search-results-box {
+      margin-block-start: 6rem;
+    }
+
+    .view-header {
+      font-size: 2rem;
+      line-height: 2;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .views-exposed-form {
+      max-width: 100%;
+      margin-inline: auto;
+      margin-block: 0;
+      position: relative;
+
+      label[for="edit-search"],
+      label[for="edit-search-api-fulltext"] {
+        @include visually-hidden;
+      }
+
+      .form-item {
+        margin-inline: 0;
+        margin-block: 0;
+        padding-inline: 0;
+        padding-block: 0;
+      }
+
+      #edit-actions {
+        margin-inline: 0;
+        margin-block: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      input[id^="edit-search"] {
+        border: 2px solid var(--miles-green);
+        padding: 15px 20px 15px 50px;
+        width: 100%;
+      }
+
+      input[id^='edit-submit-acquia-search'],
+      input[id^='edit-submit-local-search'] {
+        @include svg-colorized($magnifier, #4ca900);
+
+        background-size: 19px 19px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+        text-indent: -9999rem;
+        border: 0;
+        width: 40px;
+        height: 52px;
+      }
+
+      #edit-reset {
+        display: none;
+      }
+    }
+
+    .view-content {
+      padding-block-start: 6rem;
+    }
+
+    .views-row {
+      margin-block-end: 2.5rem;
+      padding: 0 3px;
+    }
+  }
+}

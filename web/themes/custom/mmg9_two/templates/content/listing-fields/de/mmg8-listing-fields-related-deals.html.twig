@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if listing.products[0].deals is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+<h3>{{ "Deals" | t }}</h3>
+<ul>
+    {% for deal in listing.products[0].deals %}
+      <li class="deal">
+        <div class="deal-title"><h4>{{ deal.title }}</h4></div>
+        <div class="deal-dates">{{ "Valid" }}: {{ deal.valid_start_date | date('m/d/Y') }} - {{ deal.valid_end_date | date('m/d/Y') }}</div>
+        <div class="deal-description">{{ deal.deal_text|length > 50 ? deal.deal_text|slice(0, 150) ~ ' [...]' : deal.deal_text  }}</div>
+        <div class="deal-cta">{{ link("Read More"|t, "internal:/node/" ~ deal.nid ) }}</div>
+      </li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}

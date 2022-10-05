@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+{% if listing.deal_disclaimer is not empty %}
+  <div class="mmg8-listing-fields mmg8_listing_fields_description {{ theme_hook_original }}">
+    <h3>{{ "Disclaimer" | t }}</h3>
+    {{ listing.deal_disclaimer }}
+  </div>
+{% endif %}

@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if listing.socials is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+<h3>{{ "Social" | t }}</h3>
+<ul>
+  {% if listing.socials.facebook is not empty %}
+    <li class="facebook"><a data-action="outbound_{{ view_mode }}--facebook" class="partner-referral social--link social--link--facebook-{{ listing.socials.facebook|clean_class }}" href="https://facebook.com/{{ listing.socials.facebook }}"><span>{{ 'Facebook' |t }}</span></a></li>
+  {% endif %}
+
+  {% if listing.socials.twitter is not empty %}
+    <li class="twitter"><a data-action="outbound_{{ view_mode }}--twitter" class="partner-referral social--link social--link--twitter-{{ listing.socials.twitter|clean_class }}" href="https://twitter.com/{{ listing.socials.twitter }}"><span>{{ 'Twitter' |t }}</span></a></li>
+  {% endif %}
+
+  {% if listing.socials.youtube is not empty %}
+      <li class="youtube"><a data-action="outbound_{{ view_mode }}--youtube" class="partner-referral social--link social--link--youtube-{{ listing.socials.youtube|clean_class }}" href="https://youtube.com/{{ listing.socials.youtube }}"><span>{{ 'YouTube' |t }}</span></a></li>
+  {% endif %}
+
+  {% if listing.socials.flickr is not empty %}
+      <li class="flickr"><a data-action="outbound_{{ view_mode }}--flickr" class="partner-referral social--link social--link--flickr-{{ listing.socials.flickr|clean_class }}" href="https://flickr.com/{{ listing.socials.flickr }}"><span>{{ 'Flickr' |t }}</span></a></li>
+  {% endif %}
+
+  {% if listing.socials.pinterest is not empty %}
+      <li class="pinterest"><a data-action="outbound_{{ view_mode }}--pinterest" class="partner-referral social--link social--link--pinterest-{{ listing.socials.pinterest|clean_class }}" href="https://pinterest.com/{{ listing.socials.pinterest }}"><span>{{ 'Pinterest' |t }}</span></a></li>
+  {% endif %}
+
+  {% if listing.socials.instagram is not empty %}
+      <li class="instagram"><a data-action="outbound_{{ view_mode }}--instagram" class="partner-referral social--link social--link--instagram-{{ listing.socials.instagram|clean_class }}" href="https://instagram.com/{{ listing.socials.instagram }}"><span>{{ 'Instagram' |t }}</span></a></li>
+  {% endif %}
+  {% if listing.socials.instagram is not empty %}
+      <li class="instagram"><a data-action="outbound_{{ view_mode }}--instagram" class="partner-referral social--link social--link--instagram-{{ listing.socials.instagram|clean_class }}" href="https://instagram.com/{{ listing.socials.instagram }}"><span>{{ 'Instagram' |t }}</span></a></li>
+  {% endif %}
+  {% if listing.socials.tripadvisor is not empty %}
+    <div class="tripadvisor">
+
+    <div id="TA_socialButtonBubbles944" class="TA_socialButtonBubbles"><ul id="9L8bhHH3hDJ" class="TA_links NWqFBkxuS4lL"><li id="OFmXEYkcS" class="qqU3h4"><a target="_blank" href="https://www.tripadvisor.com/{{ listing.socials.tripadvisor }}"><img src="https://www.tripadvisor.com/img/cdsi/img2/branding/socialWidget/20x28_green-21693-2.png"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=socialButtonBubbles&amp;uniq=944&amp;locationId={{ listing.socials.tripadvisor }}&amp;color=green&amp;size=rect&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+
+    </div>
+  {% endif %}
+</ul>
+</div>
+{% endif %}

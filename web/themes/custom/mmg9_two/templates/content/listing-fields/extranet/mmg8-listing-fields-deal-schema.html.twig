@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<h1>NEED TO UPDATE SITENAME IN SCHEMA (see script below [INSERT-SITE-HERE])</h1>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Offer",
+  "name": "{{ listing.title|replace({'"': '\"'}) }}",
+
+  "url": "{{ schema_id }}",
+
+  "validFrom": "{{ listing.valid_start_date | date("Y-m-d\TH:i:s") }}",
+
+  "validThrough": "{{ listing.valid_end_date | date("Y-m-d\TH:i:s") }}",
+
+  {% if node.field_images.0.entity.uri.0.value is not empty %}
+  "image": [
+    {% for photo in node.field_images %}
+    "https://www.[INSERT-SITE-HERE].com{{ file_url(photo.entity.uri.0.value) }}"
+    {{ not loop.last ? "," }}
+    {% endfor %}
+   ],
+  {% endif %}
+
+  "description": "{{ listing.deal_text | striptags | replace({'"': '\"'}) }}"
+}
+</script>

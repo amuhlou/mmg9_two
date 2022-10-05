@@ -1,0 +1,43 @@
+div#sliding-popup,
+div#sliding-popup .eu-cookie-withdraw-banner,
+.eu-cookie-withdraw-tab {
+  padding-inline: 0.75rem;
+  padding-block: 0.75rem 0;
+  background-color: var(--font-color-base);
+}
+
+.eu-cookie-compliance-message {
+  h1,
+  h2,
+  p {
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+    text-align: left;
+  }
+}
+
+.eu-cookie-compliance-more-button {
+  color: var(--white);
+}
+
+.eu-cookie-compliance-buttons {
+  .agree-button {
+    @include button;
+
+    font-family: var(--font-family-base);
+    box-shadow: none;
+    background-image: none;
+    border: none;
+    text-shadow: none;
+  }
+
+  .decline-button {
+    @include button;
+
+    font-family: var(--font-family-base);
+    box-shadow: none;
+    background-image: none;
+    border: none;
+    text-shadow: none;
+  }
+}

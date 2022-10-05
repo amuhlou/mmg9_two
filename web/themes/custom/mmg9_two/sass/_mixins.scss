@@ -1,0 +1,286 @@
+@import 'functions';
+
+// Helpful Mixins ///////////////
+@mixin center-me($max-width) {
+  max-width: $max-width;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+
+@mixin icon-font-use($fam: mmg9-two) {
+  font-family: $fam !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Maintains aspect ratio
+ * Grabbed from: https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin
+ * @param  {[type]} $width  [description]
+ * @param  {[type]} $height [description]
+ * @return {[type]}         [description]
+ */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/**
+ * Change the color of the svg.
+ */
+@mixin svg-colorized($svg, $color: $black) {
+  $svg-colorized: svg-color($svg, $color);
+
+  background-image: $svg-colorized;
+}
+
+// Make an element visually hidden, but accessible to screen readers, etc.
+// @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  word-wrap: normal;
+}
+
+// Turns off the visually-hidden effect.
+@mixin visually-hidden--off {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: visible;
+}
+
+@mixin responsive-embed-container($width: 1600, $height: 900) {
+  // Responsive video embed 16:9 container
+  // 56.25% padding is height/width - 9 divided by 16
+  position: relative;
+  padding-bottom: calc($height / $width) * 100%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin native-styled-scrollbars($thumb: var(--scrollthumbBG), $rail: var(--scrollbarBG), $width: var(--scrollbarWidth)) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $rail;
+
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $rail;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb ;
+    border-radius: 0.6rem;
+    border: 0.6rem solid $rail;
+  }
+}
+
+// HEADINGS
+@mixin h1 {
+  font-size: $h1-size-small;
+  line-height: $h1-line-height-small;
+  padding: $h1-padding;
+  color: $h1-color;
+  font-family: $h1-family;
+  font-weight: $h1-weight;
+  letter-spacing: $h1-spacing;
+  text-transform: $h1-transform;
+
+  @media #{$tablet} {
+    font-size: $h1-size;
+    line-height: $h1-line-height;
+  }
+}
+
+@mixin h2 {
+  font-size: $h2-size-small;
+  line-height: $h2-line-height-small;
+  padding: $h2-padding;
+  color: $h2-color;
+  font-weight: $h2-weight;
+  font-family: $h2-family;
+  letter-spacing: $h2-spacing;
+  text-transform: $h2-transform;
+
+  @media #{$tablet} {
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+  }
+}
+
+@mixin lead-in {
+  color: var(--miles-navy);
+  font-size: 2.4rem;
+  font-style: italic;
+  line-height: 1.21;
+  padding: 0.5rem 0 3.5rem;
+  text-transform: none;
+}
+
+@mixin h3 {
+  font-size: $h3-size-small;
+  line-height: $h3-line-height-small;
+  padding: $h3-padding;
+  color: $h3-color;
+  font-weight: $h3-weight;
+  font-family: $h3-family;
+  letter-spacing: $h3-spacing;
+  text-transform: $h3-transform;
+
+  @media #{$tablet} {
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+  }
+}
+
+@mixin h4 {
+  font-size: $h4-size-small;
+  line-height: $h4-line-height-small;
+  padding: $h4-padding;
+  color: $h4-color;
+  font-weight: $h4-weight;
+  font-family: $h4-family;
+  letter-spacing: $h4-spacing;
+  text-transform: $h4-transform;
+
+  @media #{$tablet} {
+    font-size: $h4-size;
+    line-height: $h4-line-height;
+  }
+}
+
+@mixin h5 {
+  font-size: $h5-size-small;
+  line-height: $h5-line-height-small;
+  padding: $h5-padding;
+  color: $h5-color;
+  font-weight: $h5-weight;
+  font-family: $h5-family;
+  letter-spacing: $h5-spacing;
+  text-transform: $h5-transform;
+}
+
+@mixin h6 {
+  font-size: $h6-size-small;
+  line-height: $h6-line-height-small;
+  padding: $h6-padding;
+  color: $h6-color;
+  font-weight: $h6-weight;
+  font-family: $h6-family;
+  letter-spacing: $h6-spacing;
+  text-transform: $h6-transform;
+}
+
+// BUTTONS ////////
+@mixin unbutton {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  background-image: none;
+}
+
+@mixin arrow-cta($color: var(--miles-navy), $arrow-bg: var(--miles-blue), $arrow-bghover: var(--miles-blue), $underline: var(--miles-blue)) {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: $color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    border-bottom: 0.1rem solid $underline;
+  }
+
+  &::after {
+    @include icon-font-use();
+
+    content: "\e908";
+    background-color: var(--white);
+    z-index: 1;
+    margin-inline: 0.4rem 0;
+    font-size: 0.6em;
+    vertical-align: 1px;
+    padding: 0;
+    color: $arrow-bg;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    color: $arrow-bghover;
+
+    &::after {
+      color: $arrow-bghover;
+    }
+  }
+}
+
+@mixin button($text: var(--white), $bg: var(--miles-blue), $hoverbg: var(--miles-navy), $hovertext: var(--white)) {
+  background-color: $bg;
+  color: $text;
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border: 0;
+  position: relative;
+  font-size: 2rem;
+  font-weight: 600;
+  border-radius: 3rem;
+  line-height: 1.22;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $hoverbg;
+    color: $hovertext;
+    border-color: transparent;
+  }
+}
+
+@mixin search-input-placeholder($color: var(--miles-navy)) {
+  color: $color;
+  font-weight: 700;
+  line-height: 1.6;
+  font-family: var(--nobel-cn);
+  font-size: 1.8rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}

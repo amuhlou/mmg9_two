@@ -1,0 +1,46 @@
+.drupal-messages {
+  background-color: var(--white);
+  margin-block: 2rem;
+  margin-inline: 0;
+  padding-inline: 2rem;
+  padding-block: 2rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+
+  .messages--inner {
+    @include center-me(125rem);
+  
+    margin-block: 2rem;
+    margin-inline: auto;
+  }
+
+  ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+      display: inline-block;
+      list-style-type: none;
+      margin-block: 0.2rem;
+      margin-inline: 0.2rem;
+    }
+  }
+
+  a {
+    color: var(--miles-blue);
+  }
+
+  &.messages--status {
+    background: rgba(var(--miles-green-rgb), 0.2);
+  }
+
+  &.messages--warning {
+    background: rgba(var(--miles-yellow-rgb), 0.2);
+  }
+
+  &.messages--error {
+    background: rgba(var(--miles-red-rgb), 0.2);
+  }
+}

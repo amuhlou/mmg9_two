@@ -1,0 +1,69 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<h1>NEED TO UPDATE SITENAME IN SCHEMA (see script below [INSERT-SITE-HERE])</h1>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "{{ schema_type }}",
+  "@id": "{{ schema_id }}",
+  "name": "{{ listing.name|replace({'"': '\"'}) }}",
+
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ listing.address.line_1 }}",
+    "addressLocality": "{{ listing.address.city }}",
+    "postalCode": "{{ listing.address.postcode }}",
+    "addressRegion": "{{ listing.address.state }}",
+    "addressCountry": "US"
+  },
+
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ listing.latitude }},
+    "longitude": {{ listing.longitude }}
+  },
+
+  "url": "{{ schema_id }}",
+  "telephone": "{{ listing.phone_numbers.local }}",
+
+  {% if schema_hours is not empty %}
+  "openingHoursSpecification": [
+    {% for hour in schema_hours %}
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "{{ hour.dayOfWeek }}"
+      ],
+      "opens": "{{ hour.opens }}",
+      "closes": "{{ hour.closes }}"
+    }
+    {{ not loop.last ? "," }}
+    {% endfor %}
+  ],
+  {% endif %}
+
+  {% if node.field_images.0.entity.uri.0.value is not empty %}
+  "image": [
+    {% for photo in node.field_images %}
+    "https://www.[INSERT-SITE-HERE].com{{ file_url(photo.entity.uri.0.value) }}"
+    {{ not loop.last ? "," }}
+  {% endfor %}
+   ],
+  {% endif %}
+
+  "description": "{{ listing.products[0].description.text | striptags | replace({'"': '\"'}) }}"
+}
+</script>

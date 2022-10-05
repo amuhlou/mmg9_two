@@ -1,0 +1,36 @@
+{# Tota11y ADA if admin #}
+{% if show_totally == true %}
+  {{ attach_library('mmg9_two/tota11y') }}
+{% endif %}
+
+<div {{ attributes.setAttribute('id', 'main-wrap') }}>
+  {% include "@mmg9_two/layout/includes/global-header.html.twig" %}
+    <div id="main">
+      <main id="content">
+        {% if breadcrumb or title or messages or tabs or action_links %}
+          <div id="content-header">
+            {{ breadcrumb }}
+            {{ title_prefix }}
+            {% if title and is_node != 1 %}
+                <h1 class="title push-title">{{ title }}</h1>
+            {% endif %}
+            {{ title_suffix }}
+            {{ messages }}
+
+            {% if tabs %}
+              <div class="tabs">{{ tabs }}</div>
+            {% endif %}
+
+            {% if action_links %}
+              <ul class="action-links">{{ action_links }}</ul>
+            {% endif %}
+          </div>
+        {% endif %}
+        <div id="content-area">
+          {{ page.content }}
+        </div>
+      </main>
+  </div>
+  <!-- /main -->
+  {% include "@mmg9_two/layout/includes/global-footer.html.twig" %}
+</div>

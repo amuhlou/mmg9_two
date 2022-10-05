@@ -1,0 +1,18 @@
+{#
+  To attach css to just this entity, create a library entry in mmg9.libraries.yml and use the following:
+  {{ attach_library('mmg9_two/name-of-library') }}
+
+  Helper Info For Themers (see mmg9.theme)
+  {{ kint(theme_helpers|keys) }}
+
+  Use theme_helpers with twig tweak functions (https://www.drupal.org/docs/8/modules/twig-tweak/cheat-sheet). Go forth and build cool things!
+#}
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+
+  {{ title_suffix }}
+
+  <div class="content">
+    {{ content }}
+  </div>
+</div>
+

@@ -1,0 +1,133 @@
+// see templates/menu/pager.html.twig
+.pager {
+  @include center-me(80rem);
+
+  padding-inline: 1rem;
+  flex-basis: 100%;
+
+  @media screen and (min-width: 63.125em) {
+    padding-inline: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    line-height: 1;
+    font-weight: 700;
+    font-size: 0.875rem;
+
+    li {
+      list-style-type: none;
+      margin-block-end: 0;
+
+      &::before {
+        display: none;
+      }
+
+      a {
+        margin: 0;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-bottom: 0;
+        color: var(--miles-green);
+        line-height: 1;
+      }
+
+      &.pager__item--number {
+        margin: 0 0.3125rem;
+
+        a {
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &.is-active {
+          a {
+            color: var(--miles-blue);
+          }
+        }
+      }
+
+      &.is-active a {
+        background-color: transparent;
+      }
+
+      &.pager__item--previous a,
+      &.pager__item--next a,
+      &.pager__item--first a,
+      &.pager__item--last a {
+        padding-block-start: 0.25rem;
+        padding-block-end: 0.25rem;
+      }
+
+      &.pager__item--previous,
+      &.pager__item--first,
+      &.pager__item--next,
+      &.pager__item--last {
+        margin: 0;
+      }
+
+      &.pager__item--previous {
+        padding-inline-end: 0.3125rem;
+
+        a {
+          padding-inline-start: 1.25rem;
+          margin-left: 0;
+        }
+      }
+
+      &.pager__item--previous.disabled {
+        span {
+          padding-inline-start: 1.25rem;
+        }
+      }
+
+      &.pager__item--next {
+        padding-inline-start: 0.3125rem;
+
+        a {
+          margin-block-end: 0;
+          display: flex;
+          align-items: center;
+          padding-inline-end: 1.25rem;
+        }
+      }
+
+      &.pager__item--next.disabled {
+        padding-inline-end: 1.25rem;
+      }
+
+      &.pager__item--previous.disabled,
+      &.pager__item--first.disabled,
+      &.pager__item--next.disabled,
+      &.pager__item--last.disabled {
+        span {
+          color: var(--miles-navy);
+          padding-block-start: 0.25rem;
+          padding-block-end: 0.25rem;
+          text-transform: uppercase;
+        }
+      }
+
+      &.pager__item--ellipsis {
+        margin-inline: 0.25rem;
+        margin-block: 0;
+      }
+    }
+
+    span.pipe {
+      display: inline-block;
+      width: 0.0625rem;
+      height: 1.1875rem;
+      margin-inline: 1rem;
+      margin-blockc: 0;
+      background-color: var(--miles-navy);
+    }
+  }
+}

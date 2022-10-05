@@ -1,0 +1,12 @@
+/* apply mixins to default button classes */
+.arrow-cta,
+a.arrow-cta {
+  @include arrow-cta;
+}
+
+.button,
+a.button,
+.basic-button,
+a.basic-button {
+  @include button;
+}

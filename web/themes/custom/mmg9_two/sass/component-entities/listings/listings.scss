@@ -1,0 +1,21 @@
+// import config
+// to be able to attach this to the template it
+// needs to be a standalone sass file, not a partial
+// so we lose the niceties of inheriting these things.
+//
+@import '../../config';
+@import '../../mixins';
+
+.component--listings {
+  @include center-me(80rem);
+
+  .recurring-event-hidden {
+    display: none;
+  }
+
+  .listings-map {
+    width: 37.5rem;
+    height: 25rem;
+    display: none;
+  }
+}

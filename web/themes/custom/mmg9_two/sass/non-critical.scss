@@ -2,10 +2,20 @@
 ## non critical loaded at end of body, per https://csswizardry.com/2022/09/critical-css-not-so-fast/
 ## see html.html.twig template
 */
+@import 'reset';
+@import 'config';
+@import 'mixins';
+
 .block,
 .component {
   position: relative;
-  background-color: orange;
-  border: 1px solid blue;
-
 }
+
+
+@import 'system/system';
+@import 'node/node';
+@import 'footer/footer';
+@import 'gdpr-cookie-consent/gdpr-cookie-consent';
+@import 'pager/pager';
+@import 'form/form';
+@import 'search/search';

@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+
+{% if listing.websites.booking is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+  {% if type == "event" %}
+    {{ link("Purchase Tickets"|t, listing.websites.booking, { 'target': '_blank', 'class':['button', 'partner-referral'], 'data-action' : ['outbound_' ~ view_mode ~ '--booking'], 'aria-label' : 'Purchase Tickets: ' ~ listing.name} ) }}
+  {% endif %}
+  {% if type == "deal" %}
+    {{ link("Purchase"|t, listing.websites.booking, { 'target': '_blank', 'class':['button', 'partner-referral'], 'data-action' : ['outbound_' ~ view_mode ~ '--booking'], 'aria-label' : 'Purchase: ' ~ listing.name} ) }}
+  {% endif %}
+  {% if type == 'profile' %}
+    {{ link("Book Now"|t, listing.websites.booking, { 'target': '_blank', 'class':['button', 'partner-referral'], 'data-action' : ['outbound_' ~ view_mode ~ '--booking'], 'aria-label' : 'Book Now: ' ~ listing.name} ) }}
+  {% endif %}
+  </div>
+{% endif %}

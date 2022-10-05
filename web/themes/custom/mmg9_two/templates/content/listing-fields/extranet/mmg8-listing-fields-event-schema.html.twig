@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<h1>NEED TO UPDATE SITENAME IN SCHEMA (see script below [INSERT-SITE-HERE])</h1>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Event",
+  "name": "{{ listing.name|replace({'"': '\"'}) }}",
+  "startDate": "{{ next_showing.schema_start }}",
+  "location": {
+    "@type": "Place",
+    {% if listing.venue_name is not empty %}
+    "name": "{{ listing.venue_name }}",
+    {% else %}
+    "name": "{{ listing.address.line_1 }}",
+    {% endif %}
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ listing.address.line_1 }}",
+      "addressLocality": "{{ listing.address.city }}",
+      "postalCode": "{{ listing.address.postcode }}",
+      "addressRegion": "{{ listing.address.state }}",
+      "addressCountry": "US"
+    }
+  },
+
+  {% if listing.websites.booking is not empty %}
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ listing.websites.booking }}",
+    {% if listing.websites.admission_price is not empty %}
+    "price": "{{ admission_price }}",
+    "priceCurrency": "USD",
+    {% endif %}
+    "availability": "http://schema.org/InStock",
+    "validFrom": "{{ listing.updated_at | date("Y-m-d\TH:i:s") }}"
+  },
+  {% endif %}
+
+  {% if node.field_images.0.entity.uri.0.value is not empty %}
+  "image": [
+    {% for photo in node.field_images %}
+    "https://www.[INSERT-SITE-HERE].com{{ file_url(photo.entity.uri.0.value) }}"
+    {{ not loop.last ? "," }}
+    {% endfor %}
+   ],
+  {% endif %}
+
+  "description": "{{ listing.products[0].description.text | striptags | replace({'"': '\"'}) }}",
+  "endDate": "{{ next_showing.schema_end }}"
+}
+</script>

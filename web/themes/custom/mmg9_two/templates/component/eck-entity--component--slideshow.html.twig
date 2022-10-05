@@ -1,0 +1,10 @@
+{{ attach_library('mmg9_two/slideshow') }}
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="content">
+    {{ content.rendered_slideshow }}
+    <div class="slick-arrows slick-arrows-{{ theme_helpers.eid }}"></div>
+    <div class="slideshow-dots slick-dots-{{ theme_helpers.eid }}"></div>
+  </div>
+</div>
+

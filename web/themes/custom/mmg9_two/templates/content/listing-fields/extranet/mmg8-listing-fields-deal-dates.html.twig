@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+{% if listing.valid_start_date is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+  <div class="deal-dates">
+    <h3>{{ "Valid Dates" }}</h3>
+    {% set start_date = listing.valid_start_date | date('M j, Y g') %}
+    {% trans %}
+    {{ start_date }}
+    {% endtrans %}
+    {% if listing.valid_end_date is not empty %}
+      {% set end_date = listing.valid_end_date | date('M j, Y') %}
+      {% trans %}
+        to {{ end_date }}
+      {% endtrans %}
+    {% endif %}
+  </div>
+</div>
+{% endif %}

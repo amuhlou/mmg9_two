@@ -1,0 +1,18 @@
+.component--main-content,
+.component--single-column-content {
+  > .content {
+    @include center-me(60rem);
+
+    padding-inline: 1.25rem;
+    padding-block: 1.875rem 1.25rem;
+    position: relative;
+
+    .field--name-field-main-content-subtitle {
+      //@include lead-in;
+      p {
+        margin-block: 0;
+        padding-block: 0;
+      }
+    }
+  }
+}

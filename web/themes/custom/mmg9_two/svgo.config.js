@@ -1,4 +1,5 @@
-export default {
+// svgo.config.js
+module.exports = {
   multipass: true,
   plugins: [
     {

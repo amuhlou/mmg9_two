@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+{% set email_options = 
+  {
+    'business_email': 'Business Email',
+    'booking_email': 'Booking Email',
+    'email': 'Email',
+  }
+%}
+
+{% if listing.business_email is not empty or listing.booking_email is not empty  %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+  {% set continue = true %}
+  {% for email_address_type,email_address in email_options %}
+    {% if attribute(listing, email_address_type) is not empty %}
+      {% if continue %}
+      {{ link("Email"|t, 'mailto:' ~ attribute(listing, email_address_type), { 'class':['email--' ~ email_address_type,'partner-referral'] , 'data-action' : ['outbound_' ~ view_mode ~ '--email'] }) }}
+      {% endif %}
+      {% set continue = false %}
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endif %}
+

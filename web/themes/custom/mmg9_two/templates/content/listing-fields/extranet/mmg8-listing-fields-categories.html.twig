@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if categories is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+  <ul class="categories">
+    {% for category in categories %}
+      <li class="category">{{ category.value }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

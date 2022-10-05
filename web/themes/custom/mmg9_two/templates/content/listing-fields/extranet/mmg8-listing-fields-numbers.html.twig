@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+{% set phone_options = 
+  {
+    'local': 'Phone'| t,
+    'alt': 'Alternate Phone'|t,
+    'fax': 'Fax'|t,
+    'free_us': 'US Toll Free'|t,
+    'free_world': 'Worldwide Toll Free'|t
+  }
+%}
+
+{% set phone_data_action = 
+  {
+    'local': 'local-phone',
+    'alt': 'local-phone',
+    'fax': 'fax',
+    'free_us': 'tollfree-phone',
+    'free_world': 'tollfree-phone'
+  }
+%}
+
+{% if listing.phone_numbers is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+  <h3>{{ "Phone" | t }}</h3>
+  {% set continue = true %}
+  {% for phone_type,phone in phone_options %}
+    {% if attribute(listing.phone_numbers, phone_type) is not empty %}
+      {% if continue %}
+      {{ link(attribute(listing.phone_numbers, phone_type), 'tel:' ~ attribute(listing.phone_numbers, phone_type), { 'class':['phone-link', 'email--' ~ phone_type,'partner-referral'] , 'data-action' : ['outbound_' ~ view_mode ~ '--' ~ attribute(phone_data_action, phone_type)] }) }}
+      {% endif %}
+      {% set continue = false %}
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endif %}

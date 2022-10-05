@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+{% if type == 'deal' and deal_venue_listing is not empty %}
+  {% set listing = deal_venue_listing %}
+{% endif %}
+
+{% set phone_options =
+  {
+    'local_phone': 'Phone'| t,
+    'alt_local_phone': 'Alternate Phone'|t,
+    'fax': 'Fax'|t,
+    'us_toll_free_phone': 'US Toll Free'|t,
+    'worldwide_toll_free_phone': 'Worldwide Toll Free'|t
+  }
+%}
+
+{% set phone_tracking_names =
+  {
+    'local_phone': 'local-phone',
+    'alt_local_phone': 'local-phone',
+    'fax': 'fax',
+    'us_toll_free_phone': 'tollfree-phone',
+    'worldwide_toll_free_phone': 'tollfree-phone'
+  }
+%}
+
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+{# <h3>{{ "Phone" | t }}</h3> #}
+{% set continue = true %}
+{% for phone_type,phone in phone_options %}
+  {% if attribute(listing, phone_type) is not empty %}
+    {% if continue %}
+    {{ link(attribute(listing, phone_type), 'tel:' ~ attribute(listing, phone_type), { 'class':['phone-link', 'email--' ~ phone_type,'partner-referral'] , 'data-action' : ['outbound_' ~ view_mode ~ '--' ~ phone_tracking_names[phone_type]] }) }}
+    {% endif %}
+    {% set continue = false %}
+  {% endif %}
+{% endfor %}
+</div>
+

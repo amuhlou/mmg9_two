@@ -22,7 +22,7 @@ function mmg9_two_page_attachments_alter(array &$attachments) {
       'rel' => 'preload',
       'as' => 'style',
       'onload' => 'this.onload=null; this.rel="stylesheet"',
-      'href' => '/themes/custom/mmg9/sass/fonts.css?v1.0',
+      'href' => '/themes/custom/mmg9_two/sass/fonts/fonts.css?v1.0',
     ],
   ];
 
@@ -86,7 +86,7 @@ function mmg9_two_preprocess_page(&$variables) {
   }
 
   // Load the Logo
-  $logo_header_file = drupal_get_path('theme', 'mmg9_two') . '/mmg9_two_logo.svg';
+  $logo_header_file = drupal_get_path('theme', 'mmg9_two') . '/mmg9_two.svg';
   // Check file extension and render logo accordingly
   if ($logo_header_file) {
     $ext = pathinfo($logo_header_file, PATHINFO_EXTENSION);
@@ -108,6 +108,57 @@ function mmg9_two_preprocess_page(&$variables) {
     foreach ($user_roles as $user_role) {
       if (in_array($user_role, $tota11y_roles)) {
         $variables['show_totally'] = TRUE;
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements template_preprocess_block().
+ */
+function mmg9_two_preprocess_block(&$variables) {
+  // Custom block type helper classes.
+  $variables['attributes']['class'][] = Html::cleanCssIdentifier('block');
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $bundle = $variables['elements']['content']['#block_content']->bundle();
+    $bundle_class = str_replace('_', '-', $bundle);
+
+    if (isset($bundle_class)) {
+      $variables['attributes']['class'][] = Html::cleanCssIdentifier('block--bundle-' . $bundle_class);
+      $variables['attributes']['data-bundle-class'] = $bundle_class;
+    }
+  }
+}
+
+function mmg9_two_preprocess_media(array &$variables) {
+  $media = $variables['elements']['#media'];
+  $variables['media'] = $variables['elements']['#media'];
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $variables['name'] = $variables['media']->label();
+  $variables['bundle'] = $variables['media']->bundle();
+
+  if ($variables['bundle'] == 'remote_video') {
+    $variables['title'] = $media->getName();
+    $variables['video_uri'] = $media->get('field_media_oembed_video')->value ?? '';
+  }
+
+  if($variables['bundle'] == 'video_file') {
+    if (!empty($media->get('field_media_video_file')->getValue())) {
+      $fid = $media->get('field_media_video_file')->getValue()[0]['target_id'];
+      $video_file = File::load($fid);
+      $variables['video_url'] = $video_file->createFileUrl();
+    }
+  }
+
+  if (!empty($media->_referringItem)) {
+    $referencing_field = $media->_referringItem->getParent();
+    if (!empty($referencing_field = $media->_referringItem->getParent()) &&  !empty($referencing_field->getParent()->getValue()->id)) {
+        $parent_id = $referencing_field->getParent()->getValue()->id->getValue()[0]['value'];
+      if (!empty($parent_id)) {
+        $variables['parent_entity_id'] = '-parent-' . $parent_id;
+      } else {
+        $variables['parent_entity_id'] = '';
       }
     }
   }

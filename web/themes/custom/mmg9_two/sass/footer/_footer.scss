@@ -1,0 +1,23 @@
+#footer {
+  background-color: var(--miles-light-gray);
+  position: relative;
+  width: 100%;
+
+  #footer--top {
+    .inner {
+      @include center-me(96rem);
+
+      padding-inline: 2rem;
+      padding-block: 4rem;
+    }
+  }
+
+  #footer--bottom {
+    //
+  }
+}
+
+// tota11y ADA glasses
+#tota11y-toolbar {
+  z-index: 99999999 !important;
+}

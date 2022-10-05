@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ * - amenities: Sorted amenities
+ * - node: listing node
+#}
+
+{% if listing.latitude is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    {{ link("Get Directions"|t, 'https://www.google.com/maps/dir/Current+Location/' ~ listing.latitude ~ ',' ~ listing.longitude, { 'class':['directions--link','partner-referral'] , 'data-action' : ['outbound_' ~ view_mode ~ '--latlon'] }) }}    
+  </div>
+{% endif %}

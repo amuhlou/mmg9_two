@@ -1,0 +1,23 @@
+{%
+  set classes = [
+    content.field_acl_facets[0] ? 'has-facets' : 'no-facets',
+    'facets-closed',
+  ]
+%}
+{{ attach_library('mmg9_two/article-content-list') }}
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="content">
+    {% if content.field_acl_title.0 %}
+      <h2 class="field--name-field-acl-title"><div data-quickedit-field-id="component/{{ theme_helpers.eid }}/field_acl_title/en/full" class="field--type-text field--label-hidden field__item quickedit-field">{{ content.field_acl_title|field_value }}</div></h2>
+    {% endif %}
+    {{ content.field_acl_subtitle }}
+    {{ content.field_acl_cta }}
+    <div class="facets-wrap">
+      <button class="filter-results-mobile closed"><span>{{ 'Filter Results'|t }}</span></button>
+      {{ content.field_acl_facets }}
+    </div>
+    {{ content.mmg8_content_articles_list_view }}
+  </div>
+</div>
+

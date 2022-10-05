@@ -1,0 +1,31 @@
+// Webforms
+//
+// Webform elements.
+#webform-submission-submit-an-event-add-form {
+  .repeating-dates-wrapper,
+  .generate-button {
+    display: none;
+  }
+}
+
+.webform-options-display-two-columns {
+  @media (min-width: 400px) {
+    column-count: 1;
+
+    div.form-item {
+      margin-inline: 1rem;
+      margin-block: 1rem;
+      padding-inline: 0;
+      padding-block: 0;
+    }
+  }
+
+  @media #{$large} {
+    display: flex;
+    flex-wrap: wrap;
+
+    > div {
+      flex-basis: calc(50% - 2rem);
+    }
+  }
+}

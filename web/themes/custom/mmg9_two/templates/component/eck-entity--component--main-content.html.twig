@@ -1,0 +1,12 @@
+<div {{ attributes.addClass(classes) }} data-component-class="component--{{ theme_helpers.bundle }}" data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="content">
+    {% if content.field_main_content_title|field_value is not empty %}
+      <h1><div data-quickedit-field-id="component/{{ theme_helpers.eid }}/field_main_content_title/en/full" class="field--type-text field--label-hidden field__item quickedit-field">{{ content.field_main_content_title|field_value }}</div></h1>
+    {% endif %}
+    {% if content.field_main_content_subtitle|field_value is not empty %}
+      <h2 class="field--name-field-main-content-subtitle"><div data-quickedit-field-id="component/{{ theme_helpers.eid }}/field_main_content_subtitle/en/full" class="field--type-text-long field--label-hidden field__item quickedit-field">{{ content.field_main_content_subtitle|field_value }}</div></h2>
+    {% endif %}
+    {{ content.field_main_content_body }}
+  </div>
+</div>

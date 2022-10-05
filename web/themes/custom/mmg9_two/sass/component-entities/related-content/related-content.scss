@@ -1,0 +1,31 @@
+@import '../../config';
+@import '../../mixins';
+
+.component--related-content {
+  padding-block: 2.5rem;
+  padding-inline: 0;
+
+  > .content {
+    //
+  }
+
+  .view-related-content {
+    .view-content {
+      //
+    }
+
+    .views-row {
+      //
+    }
+  }
+
+  .field--name-field-related-content-title {
+    h2 {
+      //
+    }
+  }
+
+  .field--name-field-related-content-subtitle {
+    //
+  }
+}

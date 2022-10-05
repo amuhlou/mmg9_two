@@ -1,0 +1,110 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0, menu_name) }}
+
+{% macro menu_links(items, attributes, menu_level, menu_name) %}
+  {% import _self as menus %}
+
+  {% if items %}
+      {%
+        set menu_classes = [
+          'menu--' ~ menu_name,
+          'menu',
+        ]
+      %}
+
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass(menu_classes) }}>
+      {% for item in items %}
+          {%
+          set item_classes = [
+            item.is_expanded ? 'menu-item--expanded',
+            item.in_active_trail ? 'menu-item--active-trail',
+            item.title|lower|replace({' ': '-', '&': '', '.': '', '#': ''}),
+          ]
+          %}
+          <li{{ item.attributes.addClass('level-' ~ (menu_level + 1), item_classes) }}>
+          {# link(item.title, item.url) #}
+          {% set title %}
+            <span class="main-link-text">{{ item.title }}</span>
+          {% endset %}
+          {{ link(title, item.url) }}
+          <div class="mega">
+            <div class="inner">
+              <ul class="menu--level-2">
+                {% for level_2 in item.below %}
+                  {%
+                    set item_2_classes = [
+                      level_2.is_expanded ? 'menu-item--expanded',
+                      level_2.in_active_trail ? 'menu-item--active-trail',
+                      level_2.title|lower|replace({' ': '-', '&': '', '.': '', '#': ''}),
+                    ]
+                    %}
+                  <li{{ level_2.attributes.addClass('level-' ~ (menu_level + 2), item_2_classes) }}>
+
+                    {% set l2_title %}
+                      <span class="main-link-text">{{ level_2.title }}</span>
+                      {% if level_2.is_expanded %}
+                        <button class="menu-expando"><span class="visually-hidden">{{ 'Toggle Submenu'|t }}</span>{{ '+' }}</button>
+                      {% endif %}
+                    {% endset %}
+                    {{ link(l2_title, level_2.url) }}
+                    {% if level_2.below %}
+                      <ul class="menu--level-3 hidden">
+                      {% for level_3 in level_2.below %}
+                        {%
+                        set item_3_classes = [
+                          level_3.is_expanded ? 'menu-item--expanded',
+                          level_3.in_active_trail ? 'menu-item--active-trail',
+                          level_3.title|lower|replace({' ': '-', '&': '', '.': '', '#': ''}),
+                        ]
+                        %}
+                        {% set l3_title %}
+                          <span class="main-link-text">{{ level_3.title }}</span>
+                        {% endset %}
+                        <li{{ level_3.attributes.addClass('level-' ~ (menu_level + 3), item_3_classes) }}>
+                        {{ link(l3_title, level_3.url) }}
+                        </li>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <ul class="menu">
+        {% for item in items %}
+        <li{{ item.attributes }}>
+          {{ link(item.title, item.url) }}
+          {% if item.below %}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endif %}
+      <!--<li class='level-1 search'><button id="search-toggle-desktop" class="closed"><span>{# 'Search'|t #}</span></button><button id="search-toggle-mobile">Search</button><div id="search-container-mobile" class="closed">{# drupal_entity('block', 'exposedformacquia_searchpage') #} <button id="search-close-mobile"><span>Close Search</span></button></div></li>-->
+    </ul>
+  {% endif %}
+{% endmacro %}

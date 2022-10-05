@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if tripadvisor.location_id|length < 6 %}
+  {% set final_tripadvisor_id = ('0' ~ tripadvisor.location_id) %}
+{% else %}
+  {% set final_tripadvisor_id = tripadvisor.location_id %}
+{% endif %}
+
+{% if tripadvisor is not empty %}
+
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    <div class="{{ type }}-tripadvisor tripadvisor-content">
+      {# <strong>TripAdvisor&reg; Traveler Rating</strong> #}
+      <div class="tripadvisor-rating">
+        <a href="https://www.tripadvisor.com/{{ final_tripadvisor_id }}">
+          <img src="{{ tripadvisor.rating_image_url }}" class="ta-image" target="_blank">
+          <span class="tripadvisor-reviews">Based on {{ tripadvisor.num_reviews }} reviews</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+{% endif %}

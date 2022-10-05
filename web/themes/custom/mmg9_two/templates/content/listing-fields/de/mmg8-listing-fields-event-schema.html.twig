@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Event",
+  "name": "{{ listing.0.name|replace({'"': '\"'}) }}",
+  "startDate": "{{ next_showing.schema_start }}",
+  "location": {
+    "@type": "Place",
+    {% if listing.0.venue_name is not empty %}
+    "name": "{{ listing.0.venue_name }}",
+    {% else %}
+    "name": "{{ listing.0.address }}",
+    {% endif %}
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ listing.0.address }}",
+      "addressLocality": "{{ listing.0.city }}",
+      "postalCode": "{{ listing.0.zip }}",
+      "addressRegion": "{{ listing.0.state }}",
+      "addressCountry": "US"
+    }
+  },
+
+  {% if listing.0.booking_url is not empty %}
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ listing.0.booking_url }}",
+    {% if listing.websites.admission_price is not empty %}
+    "price": "{{ listing.0.admission }}",
+    "priceCurrency": "USD",
+    {% endif %}
+    "availability": "http://schema.org/InStock",
+    "validFrom": "{{ listing.0.start_date | date("Y-m-d\TH:i:s") }}"
+  },
+  {% endif %}
+
+  {% if listing.0.profile_photo is not empty %}
+  "image": [
+    "{{ listing.0.profile_photo }}"
+   ],
+  {% endif %}
+
+  "description": "{{ event_summary | replace({'"': '\"'}) }}",
+  "endDate": "{{ next_showing.schema_end }}"
+}
+</script>

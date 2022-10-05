@@ -1,0 +1,56 @@
+/* MQs Use BROWSER DEFAULT font size, not what's set on html tag */
+/* 375px. aka 375/16px default browser font size */
+/* 576px aka 576/16 */
+/* 680px */
+/* 768px */
+/* 834px */
+/* 960px */
+/* 1024 */
+/* 1080 */
+/* 1150 */
+/* 1280 */
+/* 1400 */
+/* 1650 */
+/* 1920 */
+/* max 1023 */
+/**
+ SVG Variables for use with svg-colorize function & mixin
+**/
+/**
+ * Replace `$search` with `$replace` in `$string`
+ *
+ * @author Hugo Giraudel
+ * @param {String} $string - Initial string
+ * @param {String} $search - Substring to replace
+ * @param {String} $replace ('') - New value
+ * @return {String} - Updated string
+ */
+/**
+ * http://codepen.io/philippkuehn/pen/zGEjxB
+ */
+/**
+ * Change the fill color of an svg.
+ * @param  {[type]} $svg
+ * @param  {[type]} $color: $black
+ */
+/**
+ * Create properly pathed image url
+ * Usage: background-image: image-url('image.png');
+ */
+/**
+ * Maintains aspect ratio
+ * Grabbed from: https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin
+ * @param  {[type]} $width  [description]
+ * @param  {[type]} $height [description]
+ * @return {[type]}         [description]
+ */
+/**
+ * Change the color of the svg.
+ */
+.component--article-content-list {
+  max-width: 80rem;
+  -webkit-margin-start: auto;
+          margin-inline-start: auto;
+  -webkit-margin-end: auto;
+          margin-inline-end: auto;
+}

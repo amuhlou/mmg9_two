@@ -35,31 +35,12 @@ let paths = {
   }
 };
 
-/*
+// compress svgs
 function compressImg() {
   return gulp
     .src(paths.images.src)
     .pipe(changed(paths.images.dest))
-    .pipe(imagemin([
-      imagemin.gifsicle({ interlaced: true }),
-      imagemin.mozjpeg({ quality: 75, progressive: true }),
-      imagemin.optipng({ optimizationLevel: 5 }),
-      imagemin.svgo({
-        plugins: [
-          { removeViewBox: true },
-          { cleanupIDs: false }
-        ]
-      })
-    ]))
-    .pipe(gulp.dest(paths.images.dest));
-}
-*/
-
-function compressSvg() {
-  return gulp
-    .src(paths.images.src)
-    .pipe(changed(paths.images.dest))
-    .pipe(svgmin)
+    .pipe(svgmin())
     .pipe(gulp.dest(paths.images.dest));
 }
 
@@ -113,7 +94,7 @@ function watchCssJsImg() {
   // and the name of the function we want to run on change
   gulp.watch(paths.styles.src, series(compileSass, minifyCss));
   gulp.watch(paths.scripts.src, terserScripts);
-  gulp.watch(paths.images.src, compressSvg);
+  gulp.watch(paths.images.src, compressImg);
 }
 
 // Don't forget to expose the tasks!
@@ -121,14 +102,16 @@ exports.watch = watchCssJsImg;
 
 exports.build = series(
   compileSass,
-  compressSvg,
+  //compressSvg,
+  compressImg,
   minifyCss,
   terserScripts
 );
 
 exports.buildLint = series(
   compileSass,
-  compressSvg,
+  compressImg,
+  //compressSvg,
   minifyCss,
   terserScripts,
   lintCss

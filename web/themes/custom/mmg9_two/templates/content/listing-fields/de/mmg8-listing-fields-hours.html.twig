@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if listing.hours is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+<h3>{{ "Hours of Operation" | t }}</h3>
+<ul>
+    {% for day in listing.hours %}
+      {% if day.dayOfWeek == 'mon' %}
+        {% set dayExtended = 'monday' %}
+      {% elseif day.dayOfWeek == 'tue' %}
+        {% set dayExtended = 'tuesday' %}
+      {% elseif day.dayOfWeek == 'wed' %}
+        {% set dayExtended = 'wednesday' %}
+      {% elseif day.dayOfWeek == 'thu' %}
+        {% set dayExtended = 'thursday' %}
+      {% elseif day.dayOfWeek == 'fri' %}
+        {% set dayExtended = 'friday' %}
+      {% elseif day.dayOfWeek == 'sat' %}
+        {% set dayExtended = 'saturday' %}
+      {% elseif day.dayOfWeek == 'sun' %}
+        {% set dayExtended = 'sunday' %}
+      {% else %}
+        {% set dayExtended = day.dayOfWeek %}
+      {% endif %}
+      <li class="day"><span class="label">{{ dayExtended | capitalize | t }} :</span> {{ day.openAt | date("g:ia") }} - {{ day.closeAt | date("g:ia") }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}

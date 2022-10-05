@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{# Deal Venue Info #}
+{% if type == 'deal' and deal_venue_listing is not empty %}
+  {% set listing = deal_venue_listing %}
+{% endif %}
+
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+{% if view_mode == "full" %}
+<h3>
+  {% if type == "event" %}
+    {{ "Venue" | t }}
+  {% elseif type == "deal" and listing.listings is not empty %}
+    {{ "Location" | t }}
+  {% else %}
+    {{ "Location" | t }}
+  {% endif %}
+</h3>
+{% endif %}
+
+{% if listing.venue_name is not empty %}
+  <div class="address-venue">{{ listing.venue_name }}</div>
+{% endif %}
+
+{% if view_mode == "full" or view_mode == "nearby_adjacent_to_map" %}
+  {% if listing.address is not empty %}
+    <div class="address">{{ listing.address }}</div>
+  {% endif %}
+
+  {% if listing.address2 is not empty %}
+    <div class="address-2">{{ address2 }}</div>
+  {% endif %}
+
+  {% if listing.city is not empty %}
+    <div class="city-state-zip">
+      <span class="city">{{ listing.city }}</span>
+      <span class="state">{{ listing.state }}</span>
+      <span class="zip">{{ listing.zip }}</span>
+    </div>
+  {% endif %}
+{% elseif view_mode == 'related' or view_mode == 'teaser' or view_mode == 'related_profile_no_map' or view_mode == 'related_properties_map_tooltip' %}
+  {% if type == 'deal' and listing.name is not empty %}
+    <div class="listing--venue-name"><strong>{{ listing.name }}</strong></div>
+  {% endif %}
+  {% if listing.address is not empty %}
+    {{ listing.address ~ ', ' }}
+  {% endif %}
+  {% if listing.address2 is not empty %}
+    {{ listing.address2  ~ ' ' }}
+  {% endif %}
+  {% if listing.city is not empty %}
+    {{ listing.city ~ ', ' }}
+    {{ listing.state ~ ' ' }}
+    {{ listing.zip }}
+  {% endif %}
+{% endif %}
+</div>
+

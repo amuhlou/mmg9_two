@@ -1,0 +1,6 @@
+@import '../../config';
+@import '../../mixins';
+
+.component--article-content-list {
+  @include center-me(80rem);
+}

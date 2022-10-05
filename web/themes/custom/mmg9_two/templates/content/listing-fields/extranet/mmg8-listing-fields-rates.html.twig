@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if listing.rates is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+<h3>{{ "Rates" | t }}</h3>
+<ul>
+    {% for rate in listing.rates %}
+      {% if rate.name|lower == 'free' %}
+      <li class="rate">{{ rate.name }}</li>
+      {% else %}
+      <li class="rate"><span class="rate-name">{{ rate.name }}</span>: ${{ rate.value }}</li>
+      {% endif %}
+    {% endfor %}
+</ul>
+</div>
+{% endif %}

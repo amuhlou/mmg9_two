@@ -1,0 +1,23 @@
+#main-menu {
+  display: none;
+
+  &.opened {
+    display: block;
+    position: absolute;
+    background-color: var(--miles-light-gray);
+    top: 7rem;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    padding-block: 0 1.6rem;
+    padding-inline: 0;
+  }
+
+  li.level-1 {
+    > a {
+      padding-block: 1.6rem;
+      padding-inline: 1.8rem;
+      display: inline-block;
+    }
+  }
+}

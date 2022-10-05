@@ -1,0 +1,46 @@
+{%
+  set classes = [
+    content.field_hero_text_position[0]['#markup'] ? 'text--' ~ content.field_hero_text_position[0]['#markup'] : 'text--middle',
+  ]
+%}
+{# css for this component is considered critical so it's loaded in critical.min.css #}
+<div {{ attributes.addClass(classes) }} data-entity-id="{{ theme_helpers.eid }}">
+  {{ title_suffix }}
+  <div class="content">
+    {% if content.field_hero_video[0] and content.field_hero_image[0] %}
+    <div class="media video-and-img">
+    {% else %}
+    <div class="media">
+    {% endif %}
+    {# hero video field display settings should be Thumbnail format, Responsive Image: hero, linked to provider #}
+    {{ content.field_hero_video }}
+    {{ content.field_hero_image }}
+    </div>
+
+    <div class="text-overlay">
+
+      <div class="text-overlay--inner">
+        {{ content.field_hero_intro_text }}
+        {% if content.field_hero_title %}
+          {# Determine if h1 or div tag should wrap. #}
+          {# For seo/ada reasons, only one h1 per page. main content title takes precedence #}
+          {# main_content_title is set in mmg8_cog.theme #}
+          {% if main_content_title is not empty and main_content_title == true %}
+            <div class="field--name-field-hero-title"><div data-quickedit-field-id="component/{{ theme_helpers.eid }}/field_hero_title/en/full" class="field--type-text field--label-hidden field__item quickedit-field">{{ content.field_hero_title|field_value }}</div>
+            </div>
+          {% else %}
+
+              <h1 class="field--name-field-hero-title"><div data-quickedit-field-id="component/{{ theme_helpers.eid }}/field_hero_title/en/full" class="field--type-text field--label-hidden field__item quickedit-field">{{ content.field_hero_title|field_value }}</div></h1>
+
+          {% endif %}
+        {% endif %}
+        {{ content.field_hero_subtitle }}
+        {{ content.field_hero_cta }}
+        {% if content.field_hero_video[0] %}
+          <button class="play-video"><span class="visually-hidden">Play Video</span></button>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>

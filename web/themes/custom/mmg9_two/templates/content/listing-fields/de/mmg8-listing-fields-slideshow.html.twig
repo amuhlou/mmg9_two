@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+ *
+ * Notes for slideshow field extra field:
+ * Logic that writes html is in:
+ * /docroot/modules/features/site_features/mmg8_listing_fields/mmg8_listing_fields.module
+ * The logic here builds array of images imported in from DE,
+ * renders with prefix and suffix, then assigns to "media" array.
+ *
+ * The module file also attaches slick library needed for slideshow functionality.
+ *
+ * The javascript that initializes slick is in:
+ * /docroot/modules/features/site_features/mmg8_listing_fields/js/mmg8_listing_fields_slideshow.js
+#}
+
+{{ media }}

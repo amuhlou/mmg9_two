@@ -1,0 +1,34 @@
+#header {
+  #nav-toggle {
+    @include unbutton;
+    width: 4rem;
+    height: 4rem;
+    border: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    &::before {
+      @include icon-font-use;
+
+      color: var(--miles-navy);
+      content: '\e900';
+      font-size: 0.8em;
+    }
+
+    span.nav-toggle-txt > span {
+      @include visually-hidden;
+    }
+
+    &.opened {
+      &::before {
+        content: '\e90a';
+        font-size: 1em;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

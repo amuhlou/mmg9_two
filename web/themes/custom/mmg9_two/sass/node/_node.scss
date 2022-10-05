@@ -1,0 +1,16 @@
+@import 'article/article';
+@import 'landing-page/landing-page';
+@import 'listings/listings';
+
+.node--unpublished {
+  background-color: rgba(var(--miles-yellow-rgb), 0.16);
+  position: relative;
+
+  &::before {
+    content: 'CONTENT NOT PUBLISHED';
+    display: block;
+    background-color: var(--miles-blue);
+    color: var(--white);
+    text-align: center;
+  }
+}

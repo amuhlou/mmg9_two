@@ -2,3 +2,14 @@
 Fonts to be preloaded in the header
 See mmg9_two.theme
 */
+@font-face {
+  font-family: 'mmg9-two';
+  src:  url('../../iconfont/icomoon.eot?oaancp');
+  src:  url('../../iconfont/icomoon.eot?oaancp#iefix') format('embedded-opentype'),
+    url('../../iconfont/icomoon.ttf?oaancp') format('truetype'),
+    url('../../iconfont/icomoon.woff?oaancp') format('woff'),
+    url('../../iconfont/icomoon.svg?oaancp#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

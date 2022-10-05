@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<div class="mmg8-listing-fields-wrapper">
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    {% if listing.venue_name is not empty %}
+      <div class="address-venue">{{ listing.venue_name }}</div>
+    {% endif %}
+
+    {# Deal Venue Info #}
+    {% if listing.type == 'deal' and listing.listings is not empty %}
+      {% if deal_venue_listing.nid is not empty %}
+        <div class="address-location">
+          <a href="{{ path('entity.node.canonical', {'node': deal_venue_listing.nid}) }}">{{ listing.listings[0].name }}</a>
+        </div>
+      {% elseif listing.listings[0].name is not empty %}
+        <div class="address-location">{{ listing.listings[0].name }}</div>
+      {% endif %}
+      <div class="address-line-1">{{ deal_venue_listing.line_1 }}</div>
+      <div class="address-line-2">
+        {% if deal_venue_listing.city is not empty %}
+          {{ deal_venue_listing.city }},
+        {% endif %}
+        {% if deal_venue_listing.state is not empty %}
+          {{ deal_venue_listing.state }}
+        {% endif %}
+      </div>
+      <div class="address-line-3">{{ deal_venue_listing.postcode }}</div>
+      {% if view_mode == "full" %}
+        <div class="address-phone">{{ "Tel:"|t }} <a class="partner-referral" data-action="outbound_full--local--phone" href="tel:{{ listing.phone }}">{{ listing.phone }}</a></div>
+        <div class="address-email">{{ "Email:"|t }} <a class="partner-referral" data-action="outbound_full--business--email" href="mailto:{{ listing.email }}">{{ listing.email }}</a></div>
+      {% endif %}
+    {% endif %}
+
+    {# Full Lisiting #}
+    {% if view_mode == "full" %}
+      {% spaceless %}
+        {% if listing.address.line_1 is not empty %}
+          <span class="address">{{ listing.address.line_1 }}</span>
+
+          {% if listing.address.line_2 is not empty %}
+            <span class="address-2">{{ listing.address.line_2 }}</span>
+          {% endif %}
+
+          {% if listing.address.city is not empty %}
+            <span>,&nbsp;</span>
+          {% endif %}
+        {% endif %}
+
+        {% if listing.address.city is not empty %}
+          <span class="city-state-zip">
+            <span class="city">{{ listing.address.city }}</span>
+            {% if listing.address.state is not empty %}
+              <span>,&nbsp;</span>
+              <span class="state">{{ listing.address.state }}</span>
+            {% endif %}
+            {% if listing.address.postcode is not empty %}
+              <span>&nbsp;</span>
+              <span class="zip">{{ listing.address.postcode }}</span>
+            {% endif %}
+          </span>
+        {% endif %}
+      {% endspaceless %}
+    {% endif %}
+
+    {# Teaser Profile #}
+    {% if type == 'profile' and view_mode == 'teaser' %}
+      {% if listing.address.city is not empty %}
+        <div class="city">{{ listing.address.city }}</div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

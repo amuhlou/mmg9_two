@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% set site_options =
+  {
+    'business': 'Website'|t,
+  }
+%}
+
+{% if listing.websites is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+
+  {% set continue = true %}
+  {% for website_type,site in site_options %}
+    {% if attribute(listing.websites, website_type) is not empty %}
+      {% if continue %}
+      {{ link('Visit Website'|t, attribute(listing.websites, website_type), { 'class':['button', 'website-link', 'website-link--' ~ attribute(listing.websites, website_type)|clean_class, 'partner-referral'] , 'target': '_blank', 'data-action' : ['outbound_' ~ view_mode ~ '--website'] }) }}
+      {% endif %}
+      {% set continue = false %}
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endif %}
+
+{% if listing.website is not empty %}
+  <div class="mmg8-listing-fields {{ theme_hook_original }}">
+    {{ link('Visit Website'|t, listing.website, { 'class':['button', 'website-link', 'website-link--' ~ listing.website|clean_class, 'partner-referral'] , 'target': '_blank', 'data-action' : ['outbound_' ~ view_mode ~ '--website'] }) }}
+  </div>
+{% endif %}

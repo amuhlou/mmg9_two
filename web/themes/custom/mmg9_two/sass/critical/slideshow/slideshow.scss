@@ -1,0 +1,98 @@
+@import '../../config';
+@import '../../mixins';
+
+.component--slideshow {
+  > .content {
+    @include center-me(40.3125rem);
+
+    position: relative;
+  }
+
+  .mmg8-slideshow--slides {
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: relative;
+    z-index: 1;
+
+    &.slick-initialized,
+    &.single-slide {
+      opacity: 1;
+      overflow: visible;
+    }
+
+    padding-block-end: 1.6875rem;
+
+    .paragraph {
+      position: relative;
+    }
+
+    a {
+      border: 0;
+      line-height: 1;
+    }
+  }
+
+  .yt-custom-thumb .field--name-field-slideshow-slide-image,
+  .field--name-field-slideshow-slide-video a {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    &::after {
+      @include svg-colorized($play-button, #FFFFFF);
+
+      background-repeat: no-repeat;
+      content: '';
+      position: absolute;
+      background-size: 2.5rem 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      top: calc(50% - 1.25rem);
+      left: calc(50% - 1.25rem);
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      &::after {
+        @include svg-colorized($play-button, #0073bb);
+      }
+    }
+  }
+
+  .slide-media {
+    position: relative;
+  }
+
+  [id^='slide-video-'] {
+    @include responsive-embed-container($width: 645, $height: 415);
+
+    top: 0;
+    width: 100%;
+  }
+
+  .yt-custom-thumb {
+    .field--name-field-slideshow-slide-image + [id^='slide-video-'] {
+      position: absolute;
+    }
+
+    [id^='slide-video-'] {
+      z-index: -1;
+
+      &.playing {
+        z-index: 2;
+      }
+    }
+  }
+
+  .slick-arrows {
+    //@include slick-arrow-defaults;
+
+    position: absolute;
+    display: flex;
+    height: 1.6875rem;
+    width: 100%;
+    z-index: 0;
+  }
+}

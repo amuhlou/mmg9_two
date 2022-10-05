@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+{{ attach_library('mmg8_listing_fields/mmg8_listing_fields_toggle') }}
+{% if amenities is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+  <table class="amenities">
+    <caption>{{ 'Amenities'|t }}</caption>
+    <tbody>
+      {% for amenity_group,sub_amenities in amenities %}
+        <tr class="amenity {{ cycle(['odd', 'even'], loop.index0) }}">
+          <th scope="row"><span class="amenity--subamenities--header">{{ amenity_group }}</span></th>
+          <td>
+            <ul>
+              {% for amenity in sub_amenities %}
+              <li class="amenity--subamenities--subamenity">{{ amenity }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="amenities-toggle"><button>Amenities</button></div>
+</div>
+{% endif %}

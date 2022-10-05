@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+{% if brochures is not empty %}
+<div class="mmg8-listing-fields {{ theme_hook_original }}">
+<h3>{{ "Brochures" | t }}</h3>
+<ul>
+    {% for brochure in brochures %}
+        <li><span class="icon"></span>{{ link(brochure.name, brochure.url.uri) }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+
+

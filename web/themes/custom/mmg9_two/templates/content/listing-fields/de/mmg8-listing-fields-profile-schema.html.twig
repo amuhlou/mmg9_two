@@ -1,0 +1,72 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "{{ schema_type }}",
+  "@id": "{{ schema_id }}",
+  "name": "{{ listing.name|replace({'"': '\"'}) }}",
+
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ listing.address }} {{ listing.address2 }}",
+    "addressLocality": "{{ listing.city }}",
+    "postalCode": "{{ listing.zip }}",
+    "addressRegion": "{{ listing.state }}",
+    "addressCountry": "US"
+  },
+
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ listing.latitude }},
+    "longitude": {{ listing.longitude }}
+  },
+
+  "url": "{{ schema_id }}",
+  {% if listing.local_phone is not empty %}
+  "telephone": "{{ listing.local_phone }}",
+  {% elseif listing.worldwide_toll_free_phone is not empty %}
+  "telephone": "{{ listing.worldwide_toll_free_phone }}",
+  {% elseif listing.us_toll_free_phone is not empty %}
+  "telephone": "{{ listing.us_toll_free_phone }}",
+  {% endif %}
+
+  {% if schema_hours is not empty %}
+  "openingHoursSpecification": [
+    {% for hour in schema_hours %}
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "{{ hour.dayOfWeek }}"
+      ],
+      "opens": "{{ hour.opens }}",
+      "closes": "{{ hour.closes }}"
+    }
+    {{ not loop.last ? "," }}
+    {% endfor %}
+  ],
+  {% endif %}
+
+  {% if full_listing.photos is not empty %}
+  "image": [
+    {% for photo in full_listing.photos %}
+    "{{ photo.profile_full }}"
+    {{ not loop.last ? "," }}
+    {% endfor %}
+   ],
+  {% endif %}
+
+  "description": "{{ full_listing.descriptions.0.description | striptags | replace({'"': '\"'}) }}"
+}
+</script>

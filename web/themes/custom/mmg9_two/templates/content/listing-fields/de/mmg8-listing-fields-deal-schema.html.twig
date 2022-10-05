@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * mmg8 listing fields.
+ *
+ * Template file for listing fields.  Contains "listing" variable which contains all the
+ * information received from the data engine / extranet.
+ *
+ * Available variables:
+ *
+ * Listing variables:
+ * - listing: DE / extranet response stored as object.
+#}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Offer",
+  "name": "{{ full_listing.title|replace({'"': '\"'}) }}",
+
+  "url": "{{ schema_id }}",
+
+  "validFrom": "{{ full_listing.start_date | date("Y-m-d\TH:i:s") }}",
+
+  "validThrough": "{{ full_listing.end_date | date("Y-m-d\TH:i:s") }}",
+
+  {% if full_listing.photo_full is not empty %}
+  "image": [
+    "{{ full_listing.photo_full }}"
+   ],
+  {% endif %}
+
+  "description": "{{ full_listing.full_description | striptags | replace({'"': '\"'}) }}"
+}
+</script>
+

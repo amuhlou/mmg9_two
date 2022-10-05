@@ -1,0 +1,25 @@
+<header id="header" class="main-header">
+  <div class="container">
+    <div class="logo-wrap">
+      {% if logo_header %}
+        {% if site_name %}
+          <a href="{{ front_page }}" title="{{ site_name ~ ':Home'|t }}" rel="home" id="logo">
+            {{ logo_header | raw }}
+          </a>
+        {% else %}
+          <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home" id="logo">
+            {{ logo_header | raw }}
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+    <button aria-controls="main-menu" aria-label="main menu" aria-expanded="false" id="nav-toggle">
+      <span class="nav-toggle-txt"><span>{{ 'Menu'|t }}</span></span>
+    </button>
+  </div><!-- .container -->
+</header>
+<div id="main-menu">
+  <div class="main-menu--inner">
+    {{ drupal_menu('main') }}
+  </div>
+</div>
