@@ -1,10 +1,10 @@
 .component--main-content,
 .component--single-column-content {
   > .content {
-    @include center-me(60rem);
+    @include center-me(96rem);
 
-    padding-inline: 1.25rem;
-    padding-block: 1.875rem 1.25rem;
+    padding-inline: 2rem;
+    padding-block: 3rem 2rem;
     position: relative;
 
     .field--name-field-main-content-subtitle {

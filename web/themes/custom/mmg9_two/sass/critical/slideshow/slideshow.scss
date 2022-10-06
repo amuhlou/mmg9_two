@@ -3,7 +3,7 @@
 
 .component--slideshow {
   > .content {
-    @include center-me(40.3125rem);
+    @include center-me(64.5rem);
 
     position: relative;
   }
@@ -20,7 +20,7 @@
       overflow: visible;
     }
 
-    padding-block-end: 1.6875rem;
+    padding-block-end: 2.8rem;
 
     .paragraph {
       position: relative;
@@ -45,11 +45,11 @@
       background-repeat: no-repeat;
       content: '';
       position: absolute;
-      background-size: 2.5rem 2.5rem;
-      width: 2.5rem;
-      height: 2.5rem;
-      top: calc(50% - 1.25rem);
-      left: calc(50% - 1.25rem);
+      background-size: 4rem 4rem;
+      width: 4rem;
+      height: 4rem;
+      top: calc(50% - 2rem);
+      left: calc(50% - 2rem);
     }
 
     &:hover {
@@ -91,7 +91,7 @@
 
     position: absolute;
     display: flex;
-    height: 1.6875rem;
+    height: 2.8rem;
     width: 100%;
     z-index: 0;
   }

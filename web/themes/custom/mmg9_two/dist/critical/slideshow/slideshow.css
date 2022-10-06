@@ -48,7 +48,7 @@
  * Change the color of the svg.
  */
 .component--slideshow > .content {
-  max-width: 40.3125rem;
+  max-width: 64.5rem;
   -webkit-margin-start: auto;
           margin-inline-start: auto;
   -webkit-margin-end: auto;
@@ -60,8 +60,8 @@
   transition: opacity 0.5s;
   position: relative;
   z-index: 1;
-  -webkit-padding-after: 1.6875rem;
-          padding-block-end: 1.6875rem;
+  -webkit-padding-after: 2.8rem;
+          padding-block-end: 2.8rem;
 }
 .component--slideshow .mmg8-slideshow--slides.slick-initialized, .component--slideshow .mmg8-slideshow--slides.single-slide {
   opacity: 1;
@@ -87,11 +87,11 @@
   background-repeat: no-repeat;
   content: "";
   position: absolute;
-  background-size: 2.5rem 2.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  top: calc(50% - 1.25rem);
-  left: calc(50% - 1.25rem);
+  background-size: 4rem 4rem;
+  width: 4rem;
+  height: 4rem;
+  top: calc(50% - 2rem);
+  left: calc(50% - 2rem);
 }
 .component--slideshow .yt-custom-thumb .field--name-field-slideshow-slide-image:hover,
 .component--slideshow .field--name-field-slideshow-slide-video a:hover {
@@ -134,7 +134,7 @@
 .component--slideshow .slick-arrows {
   position: absolute;
   display: flex;
-  height: 1.6875rem;
+  height: 2.8rem;
   width: 100%;
   z-index: 0;
 }

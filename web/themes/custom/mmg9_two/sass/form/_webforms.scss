@@ -9,7 +9,7 @@
 }
 
 .webform-options-display-two-columns {
-  @media (min-width: 400px) {
+  @media (min-width: 25em) {
     column-count: 1;
 
     div.form-item {
